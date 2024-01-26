@@ -1,11 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { renderWithRouter } from "./createTestRouter";
 import { describe, it } from "vitest";
 
 import Root from "./Root";
 
 describe("Root", () => {
   it("renders headline", () => {
-    render(<Root />);
+    renderWithRouter(<Root />);
 
     screen.debug();
   });
