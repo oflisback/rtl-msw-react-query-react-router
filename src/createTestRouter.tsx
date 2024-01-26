@@ -1,6 +1,7 @@
 import { render, RenderOptions } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { ReactElement } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 type RenderWithRouterOptions = {
   route?: string;
 } & RenderOptions;
@@ -8,10 +9,19 @@ function renderWithRouter(
   ui: ReactElement,
   { route = "/", ...renderOptions }: RenderWithRouterOptions = {},
 ) {
-  window.history.pushState({}, "Test page", route);
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
   return render(ui, {
     wrapper: ({ children }) => (
-      <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>
+      </QueryClientProvider>
     ),
     ...renderOptions,
   });
