@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Root from "./Root";
+import App from "./App";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <App />,
   },
 ]);
 

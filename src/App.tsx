@@ -1,35 +1,26 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useLocation } from "react-router-dom";
+import usePokemon from "./usePikachu";
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
+  // Use location but ignore data just to have a dependency towards react-router
+  useLocation();
+  // Use pokemon data from the network to have a dependency towards react-query
+  const { data: pokemonData } = usePokemon();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "48pt",
+        display: "flex",
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
+      {pokemonData ? pokemonData.name : "Loading"}
+    </div>
   );
-}
+};
 
 export default App;
