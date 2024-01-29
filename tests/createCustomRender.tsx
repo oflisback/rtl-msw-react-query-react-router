@@ -6,10 +6,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 type RenderWithRouterOptions = {
   route?: string;
 } & RenderOptions;
-function renderWithRouter(
+
+const renderWithWrapper = (
   ui: ReactElement,
   { route = "/", ...renderOptions }: RenderWithRouterOptions = {},
-) {
+) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -26,5 +27,5 @@ function renderWithRouter(
     ),
     ...renderOptions,
   });
-}
-export { renderWithRouter };
+};
+export { renderWithWrapper };
